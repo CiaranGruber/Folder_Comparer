@@ -1,4 +1,4 @@
-# Folder_Comparer
+# Folder Comparer
 
 Run the files in order to compare the content of different folders.
 
