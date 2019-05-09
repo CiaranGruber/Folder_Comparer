@@ -45,21 +45,27 @@ def main():
             except FileNotFoundError:
                 print('File path does not exist')
         elif menu_option == 'V':
-            with open(SAVE_FILE, encoding="utf-8") as files_folder:
-                files = [file.strip() for file in files_folder.readlines()]
-                if len(files) > 0:
-                    print('Files available')
-                    columns = 1
-                    table_data = ['Files']
-                    while sum(get_column_widths(files, columns)) < 130 and not columns >= len(files):
-                        columns += 1
-                        table_data.append('Files')
-                    print_table(table_data + files, columns)
-                else:
-                    print('No folder saved')
+            try:
+                with open(SAVE_FILE, encoding="utf-8") as files_folder:
+                    files = [file.strip() for file in files_folder.readlines()]
+                    if len(files) > 0:
+                        print('Files available')
+                        columns = 1
+                        table_data = ['Files']
+                        while sum(get_column_widths(files, columns)) < 130 and not columns >= len(files):
+                            columns += 1
+                            table_data.append('Files')
+                        print_table(table_data + files, columns)
+                    else:
+                        print('No folder saved')
+            except FileNotFoundError:
+                print('No folder saved')
         elif menu_option == 'C':
-            with open(SAVE_FILE, encoding="utf-8") as files_folder:
-                folder_files = [file.strip() for file in files_folder.readlines()]
+            try:
+                with open(SAVE_FILE, encoding="utf-8") as files_folder:
+                    folder_files = [file.strip() for file in files_folder.readlines()]
+            except FileNotFoundError:
+                folder_files = []
             if len(folder_files) == 0:
                 print('No saved folder details')
             else:
